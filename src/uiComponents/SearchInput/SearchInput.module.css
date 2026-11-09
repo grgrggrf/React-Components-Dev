@@ -1,0 +1,5 @@
+.root { display: flex; align-items: stretch; gap: 6px; width: 100%; min-width: 0; }
+.field { flex: 1; min-width: 0; }
+.root .button { flex-shrink: 0; max-width: 40%; height: auto; white-space: normal; overflow-wrap: anywhere; }
+.option { display: flex; justify-content: space-between; gap: 12px; white-space: normal; overflow-wrap: anywhere; }
+.option small { color: #64748b; flex-shrink: 0; }

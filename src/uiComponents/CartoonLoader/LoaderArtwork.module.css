@@ -1,0 +1,88 @@
+/* 默认静止，由外层加载器统一开启；不使用 SVG SMIL，保证减少动画设置有效。 */
+.spin,
+.spinSlow {
+  transform-origin: 50px 50px;
+}
+.bounce,
+.rock,
+.flame,
+.sand,
+.pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+:global([data-animated="true"][data-status="normal"]) .spin,
+:global([data-animated="true"][data-status="loading"]) .spin {
+  animation: turn 1.2s linear infinite;
+}
+:global([data-animated="true"][data-status="normal"]) .spinSlow,
+:global([data-animated="true"][data-status="loading"]) .spinSlow {
+  animation: turn 3s linear infinite;
+}
+:global([data-animated="true"][data-status="normal"]) .bounce,
+:global([data-animated="true"][data-status="loading"]) .bounce {
+  animation: hop 0.9s ease-in-out infinite;
+}
+:global([data-animated="true"][data-status="normal"]) .rock,
+:global([data-animated="true"][data-status="loading"]) .rock {
+  animation: sway 1s ease-in-out infinite;
+}
+:global([data-animated="true"][data-status="normal"]) .flame,
+:global([data-animated="true"][data-status="loading"]) .flame {
+  animation: flame 0.5s ease-in-out infinite alternate;
+}
+:global([data-animated="true"][data-status="normal"]) .sand,
+:global([data-animated="true"][data-status="loading"]) .sand,
+:global([data-animated="true"][data-status="normal"]) .pulse,
+:global([data-animated="true"][data-status="loading"]) .pulse {
+  animation: pulse 1.2s ease-in-out infinite;
+}
+@keyframes turn {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes hop {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes sway {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(3px, -3px);
+  }
+}
+@keyframes flame {
+  to {
+    transform: scale(0.75);
+    opacity: 0.5;
+  }
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .spin,
+  .spinSlow,
+  .bounce,
+  .rock,
+  .flame,
+  .sand,
+  .pulse {
+    animation: none !important;
+  }
+}

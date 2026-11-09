@@ -1,0 +1,98 @@
+.page {
+  max-width: 1350px;
+  margin: auto;
+  padding: clamp(12px, 3vw, 44px);
+  color: #142640;
+}
+.page h1 {
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 650;
+  margin-bottom: 12px;
+}
+.page h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+.card {
+  margin: 16px 0;
+  padding: clamp(14px, 2vw, 24px);
+  border: 1px solid #d8e1eb;
+  border-radius: 12px;
+}
+.tab,
+.heading,
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.heading {
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.thumbnail {
+  width: 44px;
+  height: 32px;
+  display: grid;
+  gap: 2px;
+  grid-template: "h" 1fr "c" 2fr "f" 1fr / 1fr;
+}
+.thumbnail i {
+  border-radius: 2px;
+  background: #69b1ff;
+}
+.thumbnail i:first-child {
+  grid-area: h;
+}
+.thumbnail i:nth-child(2) {
+  grid-area: c;
+  background: #0958d9;
+}
+.thumbnail i:nth-child(3) {
+  grid-area: f;
+}
+.thumbnail i:nth-child(4) {
+  grid-area: s;
+  background: #1677ff;
+}
+.thumbnail[data-variant="left"] {
+  grid-template: "h h" 1fr "s c" 2fr "f f" 1fr / 1fr 3fr;
+}
+.thumbnail[data-variant="right"] {
+  grid-template: "h h" 1fr "c s" 2fr "f f" 1fr / 3fr 1fr;
+}
+.thumbnail[data-variant="full-height-left"] {
+  grid-template: "s h" 1fr "s c" 2fr "s f" 1fr / 1fr 3fr;
+}
+.stage {
+  padding: 12px;
+  margin-top: 16px;
+  background: #f1f5f9;
+  border-radius: 8px;
+}
+.frame {
+  margin: auto;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 6px;
+}
+.controls {
+  flex-wrap: wrap;
+  margin-top: 14px;
+  gap: 16px 32px;
+}
+.controls label {
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  font-size: 14px;
+}
+.code {
+  overflow: auto;
+  max-height: 320px;
+  margin: 16px 0 8px;
+  padding: 16px;
+  background: #f5f8fc;
+  color: #173964;
+  font-size: 13px;
+}

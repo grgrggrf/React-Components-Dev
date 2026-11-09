@@ -1,0 +1,129 @@
+.container,
+.tabs,
+.body {
+  min-width: 0;
+  max-width: 100%;
+}
+.tabs > .body {
+  overflow-wrap: anywhere;
+}
+/* 标题与操作区使用独立网格区域，长标题换行也不会与按钮重叠。 */
+.headingContainer {
+  container-type: inline-size;
+  margin-bottom: 12px;
+}
+.heading {
+  display: grid;
+  grid-template: "title actions" auto / minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 8px 12px;
+}
+.title {
+  grid-area: title;
+  min-width: 0;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  text-align: start;
+}
+.actions {
+  grid-area: actions;
+  min-width: 0;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.actions > * {
+  max-width: 100%;
+  height: auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.heading[data-align="end"] {
+  grid-template-areas: "actions title";
+}
+.heading[data-align="end"] .title { text-align: end; }
+.heading[data-align="end"] .actions { justify-content: flex-start; }
+.heading[data-align="center"] {
+  grid-template: ". title actions" auto / minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr);
+}
+.heading[data-align="center"] .title { text-align: center; }
+/* 小容器里把操作区移到下一行，保证主标题完整显示、居中时仍在整栏中央。 */
+@container (max-width: 480px) {
+  .heading, .heading[data-align="end"], .heading[data-align="center"] {
+    grid-template: "title" auto "actions" auto / minmax(0, 1fr);
+  }
+  .heading[data-align="center"] .actions { justify-content: center; }
+}
+/* 标题组按导航方向对齐；溢出时释放自动外边距，让 Ant Design 继续滑动标签。 */
+.tabs > .nav > :global(.ant-tabs-nav-wrap) > :global(.ant-tabs-nav-list) {
+  flex: 0 0 auto;
+}
+.tabs[data-align="center"]:global(.ant-tabs-top) > .nav
+  > :global(.ant-tabs-nav-wrap:not([class*="ant-tabs-nav-wrap-ping"]))
+  > :global(.ant-tabs-nav-list) {
+  margin-inline: auto;
+}
+.tabs[data-align="end"]:global(.ant-tabs-top) > .nav
+  > :global(.ant-tabs-nav-wrap:not([class*="ant-tabs-nav-wrap-ping"]))
+  > :global(.ant-tabs-nav-list) {
+  margin-inline-start: auto;
+}
+.tabs[data-align="center"]:global(.ant-tabs-left) > .nav
+  > :global(.ant-tabs-nav-wrap:not([class*="ant-tabs-nav-wrap-ping"]))
+  > :global(.ant-tabs-nav-list) {
+  margin-block: auto;
+}
+.tabs[data-align="end"]:global(.ant-tabs-left) > .nav
+  > :global(.ant-tabs-nav-wrap:not([class*="ant-tabs-nav-wrap-ping"]))
+  > :global(.ant-tabs-nav-list) {
+  margin-block-start: auto;
+}
+/* 只修改自己的导航，避免影响内容里嵌套的另一组标签栏。 */
+.tabs[data-variant="pill"] > .nav {
+  padding: 5px;
+  border-radius: 28px;
+  background: color-mix(in srgb, var(--rt-active) 7%, var(--rt-surface));
+}
+.tabs[data-variant="pill"] > .nav::before {
+  border: 0;
+}
+.tabs[data-variant="pill"] > .nav .indicator {
+  display: none;
+}
+.tabs[data-variant="pill"] > .nav .item {
+  border-radius: 24px;
+  padding: 8px 18px;
+}
+.tabs[data-variant="pill"] > .nav .item:has([aria-selected="true"]) {
+  background: color-mix(in srgb, var(--rt-active) 15%, var(--rt-surface));
+}
+.tabs[data-variant="sidebar"]:global(.ant-tabs-left) > .nav {
+  width: clamp(72px, 26%, 116px);
+  flex-shrink: 0;
+  max-height: 360px;
+}
+.tabs[data-variant="sidebar"]:global(.ant-tabs-left) > .nav .item {
+  margin: 0;
+  padding: 12px 8px;
+  text-align: start;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.tabs[data-variant="sidebar"]:global(.ant-tabs-left)
+  > .nav
+  .item:has([aria-selected="true"]) {
+  background: color-mix(in srgb, var(--rt-active) 9%, var(--rt-surface));
+}
+.tabs[data-variant="sidebar"]:global(.ant-tabs-left) > .body {
+  padding-inline-start: 12px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .tabs > .nav .indicator,
+  .tabs > .nav .item {
+    transition: none;
+  }
+}

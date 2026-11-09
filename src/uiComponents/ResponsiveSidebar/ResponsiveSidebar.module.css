@@ -1,0 +1,12 @@
+.root { display: grid; position: relative; isolation: isolate; min-width: 0; grid-template-columns: min(var(--sidebar-width), 42%) minmax(0,1fr); border: 1px solid #e2e8f0; background: #fff; }
+.root[data-side="right"] { grid-template-columns: minmax(0,1fr) min(var(--sidebar-width), 42%); }
+.sider { grid-column: 1; grid-row: 1; min-width: 0; border-inline-end: 1px solid #e2e8f0; }
+.root[data-side="right"] .sider { grid-column: 2; border-inline-end: 0; border-inline-start: 1px solid #e2e8f0; }
+.header { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px; min-height: 56px; }
+.header strong { min-width: 0; overflow-wrap: anywhere; }
+.content { grid-column: 2; grid-row: 1; min-width: 0; color: #1f2937; overflow-wrap: anywhere; }
+.root[data-side="right"] .content { grid-column: 1; }
+.root[data-phone="true"] { grid-template-columns: minmax(0,1fr); grid-template-rows: auto 1fr; }
+.mobileBar { grid-column: 1; padding: 12px; }
+.root[data-side="right"] .mobileBar { text-align: right; }
+.root[data-phone="true"] .content { grid-column: 1; grid-row: 2; }

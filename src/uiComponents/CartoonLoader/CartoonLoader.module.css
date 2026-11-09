@@ -1,0 +1,152 @@
+/* 全部样式局限在组件内；复制本文件夹即可使用，不依赖 Tailwind 或 Ant Design。 */
+.loader {
+  --cl-size: var(--cl-mobile);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-width: 0;
+  max-width: 100%;
+  color: inherit;
+  font: inherit;
+}
+.inline {
+  display: inline-flex;
+  vertical-align: middle;
+}
+.art {
+  display: block;
+  position: relative;
+  width: var(--cl-size);
+  max-width: 100%;
+  aspect-ratio: 1 / 1.16;
+}
+.customCharacter {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.character {
+  display: block;
+  width: 100%;
+  height: auto;
+  transform-origin: center 75%;
+}
+.shadow {
+  position: absolute;
+  bottom: 0;
+  left: 25%;
+  width: 50%;
+  height: 6%;
+  border-radius: 50%;
+  background: var(--cl-outline);
+  opacity: 0.12;
+}
+.loader[data-animated="true"] .character {
+  animation: cl-float 1.6s ease-in-out infinite;
+}
+.loader[data-animated="true"] .shadow {
+  animation: cl-shadow 1.6s ease-in-out infinite;
+}
+.label {
+  max-width: 100%;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.boundary {
+  position: relative;
+  display: grid;
+  isolation: isolate;
+  min-width: 0;
+  width: 100%;
+}
+.content {
+  grid-area: 1 / 1;
+  min-width: 0;
+}
+.boundary[data-blocked="true"] > .content {
+  pointer-events: none;
+  user-select: none;
+}
+.overlay {
+  grid-area: 1 / 1;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  min-width: 0;
+  cursor: wait;
+  border-radius: inherit;
+}
+.inlineStatus {
+  padding: 16px;
+}
+.orbit {
+  transform-origin: 50px 50px;
+}
+.loader[data-status="loading"][data-animated="true"] .orbit {
+  animation: cl-orbit 3s linear infinite;
+}
+.loader[data-status="error"] .character,
+.loader[data-status="error"] .shadow {
+  animation: none;
+}
+@keyframes cl-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+@keyframes cl-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-5deg);
+  }
+  50% {
+    transform: translateY(-7%) rotate(5deg);
+  }
+}
+@keyframes cl-shadow {
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 0.14;
+  }
+  50% {
+    transform: scaleX(0.7);
+    opacity: 0.07;
+  }
+}
+/* 手机 <768px；平板 768–1023px；电脑 >=1024px。 */
+@media (min-width: 768px) {
+  .loader {
+    --cl-size: var(--cl-tablet);
+  }
+}
+@media (min-width: 1024px) {
+  .loader {
+    --cl-size: var(--cl-desktop);
+  }
+}
+/* 尊重系统辅助功能设置，保留静态图标和加载提示。 */
+@media (prefers-reduced-motion: reduce) {
+  .loader[data-animated="true"] .character,
+  .loader[data-status="loading"][data-animated="true"] .orbit,
+  .loader[data-animated="true"] .shadow {
+    animation: none;
+  }
+}
